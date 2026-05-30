@@ -100,14 +100,27 @@ const NAMES = {
   "BADI-1":"Seebad Enge","seb6946":"Strandbad Mythenquai",
   "seb6947":"Strandbad Tiefenbrunnen","seb6948":"Strandbad Wollishofen",
 };
+// Flächen in m² – aus Wikipedia-Massen und Satellitenbild-Ausmessungen
+// Liegewiesenflächen in m² (Gesamtareal minus Becken/Gebäude/Wege)
+// Berechnung: OSM-Gesamtareal × geschätzter Liegewiesen-Anteil
 const FL = {
-  "Flussbad Oberer Letten":7000,"Flussbad Unterer Letten":5000,
-  "Flussbad Unterer Letten (Flussteil)":2500,"Frauenbad Stadthausquai":1500,
-  "Freibad Allenmoos":20000,"Freibad Auhof":17000,"Freibad Heuried":30000,
-  "Freibad Letzigraben":16000,"Freibad Seebach":9000,
-  "Freibad Zwischen den Hölzern":8000,"Seebad Utoquai":3000,
-  "Seebad Enge":4000,"Strandbad Mythenquai":35000,
-  "Strandbad Tiefenbrunnen":28000,"Strandbad Wollishofen":22000,
+  "Flussbad Oberer Letten":          3678,  // OSM 12'261 × 30% (Steg+Fluss dominiert)
+  "Flussbad Unterer Letten":         2800,  // geschätzt
+  "Flussbad Unterer Letten (Flussteil)": 800, // geschätzt
+  "Frauenbad Stadthausquai":          659,  // gemessen (Nutzer)
+  "Männerbad Schanzengraben":         879,  // OSM 1'758 × 50%
+  "Freibad Allenmoos":              17434,  // OSM 41'509 × 42%
+  "Freibad Auhof":                   9462,  // OSM 18'924 × 50%
+  "Freibad Heuried":                10449,  // OSM 18'999 × 55%
+  "Freibad Letzigraben":            15527,  // OSM 34'505 × 45%
+  "Freibad Seebach":                10998,  // OSM 21'996 × 50%
+  "Freibad Zwischen den Hölzern":   10756,  // OSM 21'512 × 50%
+  "Seebad Enge":                     2500,  // geschätzt
+  "Seebad Katzensee":                5094,  // OSM 7'277 × 70%
+  "Seebad Utoquai":                  2000,  // geschätzt
+  "Strandbad Mythenquai":           24000,  // OSM ~40'000 × 60%
+  "Strandbad Tiefenbrunnen":        26021,  // OSM 47'311 × 55%
+  "Strandbad Wollishofen":           2475,  // OSM 3'536 × 70%
 };
 
 let liveData = {}, tempStatus = {}, ws = null, retryTimer = null;
@@ -219,7 +232,7 @@ function card(b) {
   const s=m2?bdg(m2):null, bar=m2?Math.min(100,Math.round(m2/2)):0;
   const pct=b.maxspace>0?Math.round(b.gaeste/b.maxspace*100):null;
   const acc=!b.offen?'#ccc':(s?.d||'#ccc');
-  const m2h=m2?`<div class="mv">${m2>999?m2.toLocaleString('de-CH'):m2} m²</div><div class="ml">pro Person</div>`:`<div class="mv" style="color:var(--gray)">–</div>`;
+  const m2h=m2?`<div class="mv">${m2>999?m2.toLocaleString('de-CH'):m2} m²</div><div class="ml">m² Liegewiese/Pers.</div>`:`<div class="mv" style="color:var(--gray)">–</div>`;
   const bg=b.offen?(s?`<span class="bdg ${s.c}">${s.l}</span>`:`<span class="bdg gr">Keine Zählung</span>`):`<span class="bdg gr">Geschlossen</span>`;
   const tmp=b.temp?`<span class="tmp">💧 ${b.temp}°C</span>`:'';
   const hint=b.hinweis?`<div class="hint">${b.hinweis}</div>`:'';
