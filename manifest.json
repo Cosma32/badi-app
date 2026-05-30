@@ -2,7 +2,7 @@
   "name": "Badi Zürich – Platz pro Person",
   "short_name": "Badi ZH",
   "description": "Aktuelle Gästezahlen und Platz pro Person in Zürcher Freibädern",
-  "start_url": "/",
+  "start_url": "/badi-app/",
   "display": "standalone",
   "background_color": "#0a3d62",
   "theme_color": "#0a3d62",
