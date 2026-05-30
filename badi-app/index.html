@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a3d62">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Badi Zürich">
+  <meta name="description" content="Aktuelle Gästezahlen und Platz pro Person in Zürcher Freibädern">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Badi Zürich</title>
+  <style>
+    :root {
+      --water: #0a3d62;
+      --water-mid: #1a5276;
+      --water-light: #2e86c1;
+      --water-pale: #aed6f1;
+      --foam: #eaf4fb;
+      --sand: #fef9f0;
+      --sand-dark: #f5e6c8;
+      --text: #0d1b2a;
+      --text-muted: #4a6b84;
+      --green: #1a7a4a;
+      --green-bg: #e8f5ee;
+      --amber: #b7600a;
+      --amber-bg: #fef3e2;
+      --red: #b02020;
+      --red-bg: #fdecea;
+      --gray: #607d8b;
+      --gray-bg: #eceff1;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--water);
+      color: var(--text);
+      min-height: 100dvh;
+      overscroll-behavior: none;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--water);
+      padding: calc(var(--safe-top) + 16px) 20px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .app-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+
+    .app-subtitle {
+      font-size: 12px;
+      color: var(--water-pale);
+      font-family: 'DM Mono', monospace;
+      margin-top: 2px;
+    }
+
+    .refresh-btn {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.3s;
+      flex-shrink: 0;
+    }
+    .refresh-btn:active { background: rgba(255,255,255,0.3); }
+    .refresh-btn.spinning svg { animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .refresh-btn svg { width: 20px; height: 20px; stroke: white; fill: none; }
+
+    /* WAVE DIVIDER */
+    .wave {
+      background: var(--water);
+      line-height: 0;
+    }
+    .wave svg { display: block; width: 100%; }
+
+    /* MAIN CONTENT */
+    .content {
+      background: var(--foam);
+      min-height: calc(100dvh - 120px);
+      padding: 0 0 calc(var(--safe-bottom) + 24px);
+    }
+
+    .inner {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* SUMMARY STRIP */
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 20px 16px 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .stat {
+      background: white;
+      border-radius: var(--radius-sm);
+      padding: 12px 10px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .stat-val {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--water);
+      font-family: 'DM Mono', monospace;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* TIMESTAMP */
+    .timestamp {
+      font-size: 11px;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 0 16px 14px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      padding: 8px 0 8px;
+    }
+
+    /* BADI CARD */
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:active { transform: scale(0.985); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .card.closed { opacity: 0.5; }
+
+    .card-accent {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .card-name {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .card-m2 {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .m2-val {
+      font-size: 24px;
+      font-weight: 600;
+      font-family: 'DM Mono', monospace;
+      color: var(--water);
+      line-height: 1;
+    }
+
+    .m2-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .badge-green  { background: var(--green-bg);  color: var(--green); }
+    .badge-amber  { background: var(--amber-bg);  color: var(--amber); }
+    .badge-red    { background: var(--red-bg);    color: var(--red); }
+    .badge-gray   { background: var(--gray-bg);   color: var(--gray); }
+    .badge-water  { background: #e3f2fd; color: var(--water-mid); }
+
+    .temp-chip {
+      font-size: 11px;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 6px;
+    }
+
+    /* PROGRESS BAR */
+    .bar-track {
+      background: var(--foam);
+      border-radius: 4px;
+      height: 4px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 4px;
+      border-radius: 4px;
+      transition: width 0.6s ease;
+    }
+
+    .guests-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* LOADING */
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      gap: 16px;
+    }
+
+    .loader {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--water-pale);
+      border-top-color: var(--water);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .loading p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ERROR */
+    .error-box {
+      background: var(--red-bg);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin: 16px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--red);
+    }
+
+    /* NO DATA NOTE */
+    .info-box {
+      background: #e3f2fd;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: var(--water-mid);
+      line-height: 1.5;
+    }
+
+    /* INSTALL BANNER */
+    .install-banner {
+      background: var(--water-mid);
+      color: white;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .install-banner button {
+      margin-left: auto;
+      background: white;
+      color: var(--water-mid);
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .install-banner .dismiss {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      padding: 8px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="install-banner" class="install-banner" style="display:none;">
+  <span>📲 Zum Homescreen hinzufügen für die beste Erfahrung</span>
+  <button id="install-btn">Installieren</button>
+  <button class="dismiss" id="dismiss-banner">✕</button>
+</div>
+
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <div class="app-title">🏊 Badi Zürich</div>
+      <div class="app-subtitle" id="header-time">Lade Daten…</div>
+    </div>
+    <button class="refresh-btn" id="refresh-btn" aria-label="Aktualisieren">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+        <path d="M3 3v5h5"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 1080,0 1440,20 L1440,40 L0,40 Z" fill="#eaf4fb"/>
+  </svg>
+</div>
+
+<div class="content">
+  <div class="summary" id="summary"></div>
+  <div class="timestamp" id="timestamp"></div>
+  <div class="inner" id="main-content">
+    <div class="loading">
+      <div class="loader"></div>
+      <p>Daten werden geladen…</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const BADI_FLAECHEN = {
+  "Flussbad Au-Höngg":               8000,
+  "Flussbad Oberer Letten":          7000,
+  "Flussbad Unterer Letten":         5000,
+  "Flussbad Unterer Letten (Flussteil)": 2500,
+  "Frauenbad Stadthausquai":         1500,
+  "Freibad Allenmoos":              20000,
+  "Freibad Auhof":                  17000,
+  "Freibad Dolder":                  5000,
+  "Freibad Heuried":                30000,
+  "Freibad Letzigraben":            16000,
+  "Freibad Seebach":                 9000,
+  "Freibad Zwischen den Hölzern":    8000,
+  "Männerbad Schanzengraben":        1200,
+  "Seebad Enge":                     4000,
+  "Seebad Katzensee":               25000,
+  "Seebad Utoquai":                  3000,
+  "Strandbad Mythenquai":           35000,
+  "Strandbad Tiefenbrunnen":        28000,
+  "Strandbad Wollishofen":          22000,
+};
+
+function getStatus(m2) {
+  if (m2 >= 200) return { label:"Quasi leer 🏖", cls:"badge-green",  dot:"#1a7a4a" };
+  if (m2 >= 50)  return { label:"Sehr viel Platz", cls:"badge-green", dot:"#1a7a4a" };
+  if (m2 >= 15)  return { label:"Viel Platz",    cls:"badge-water",  dot:"#2e86c1" };
+  if (m2 >= 5)   return { label:"Mässig voll",   cls:"badge-amber",  dot:"#b7600a" };
+  return               { label:"Sehr voll 🔴",   cls:"badge-red",    dot:"#b02020" };
+}
+
+async function fetchData() {
+  const btn = document.getElementById('refresh-btn');
+  btn.classList.add('spinning');
+
+  let badis = [];
+  try {
+    const r = await fetch('https://www.stadt-zuerich.ch/content/sportamt/badis/aktuelledaten.json');
+    if (r.ok) badis = await r.json();
+  } catch(e) {}
+
+  // Fallback: parse from the live page via a CORS proxy concept
+  // Use hardcoded latest scraped data as fallback
+  if (!badis.length || !Array.isArray(badis)) {
+    // Use localStorage cached data if available
+    const cached = localStorage.getItem('badi_data');
+    if (cached) {
+      try { badis = JSON.parse(cached); } catch(e) {}
+    }
+  }
+
+  btn.classList.remove('spinning');
+  return badis;
+}
+
+function formatM2(val) {
+  if (val >= 1000) return val.toLocaleString('de-CH');
+  return val.toString();
+}
+
+function renderStatic(data) {
+  // Data is the array from scraping
+  const now = new Date();
+  document.getElementById('header-time').textContent =
+    now.toLocaleDateString('de-CH', {weekday:'short', day:'numeric', month:'short'}) +
+    ' · ' + now.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'}) + ' Uhr';
+  document.getElementById('timestamp').textContent =
+    'Zuletzt aktualisiert: ' + now.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit', second:'2-digit'}) + ' Uhr';
+
+  const offene = data.filter(b => b.offen);
+  const mitZaehlung = data.filter(b => b.gaeste !== null && b.gaeste > 0);
+  const totalGaeste = mitZaehlung.reduce((s,b) => s + b.gaeste, 0);
+  const avgM2 = mitZaehlung.length
+    ? Math.round(mitZaehlung.reduce((s,b) => s + Math.round(BADI_FLAECHEN[b.name]||5000) / b.gaeste, 0) / mitZaehlung.length)
+    : 0;
+
+  document.getElementById('summary').innerHTML = `
+    <div class="stat">
+      <div class="stat-val">${offene.length}<span style="font-size:14px;color:var(--text-muted);">/${data.length}</span></div>
+      <div class="stat-label">Geöffnet</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">${totalGaeste}</div>
+      <div class="stat-label">Gäste</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">${avgM2 || '–'}</div>
+      <div class="stat-label">Ø m²/Person</div>
+    </div>
+  `;
+
+  const sorted = [...data].sort((a,b) => {
+    if (a.offen && !b.offen) return -1;
+    if (!a.offen && b.offen) return 1;
+    const ma = a.gaeste ? Math.round((BADI_FLAECHEN[a.name]||5000)/a.gaeste) : 0;
+    const mb = b.gaeste ? Math.round((BADI_FLAECHEN[b.name]||5000)/b.gaeste) : 0;
+    if (ma && !mb) return -1;
+    if (!ma && mb) return 1;
+    return mb - ma;
+  });
+
+  const offeneCards = sorted.filter(b => b.offen);
+  const geschlosseneCards = sorted.filter(b => !b.offen);
+
+  let html = '';
+
+  if (offeneCards.length) {
+    html += `<div class="section-label">Geöffnet (${offeneCards.length})</div>`;
+    html += offeneCards.map(b => renderCard(b)).join('');
+  }
+
+  if (geschlosseneCards.length) {
+    html += `<div class="section-label" style="margin-top:8px;">Geschlossen (${geschlosseneCards.length})</div>`;
+    html += geschlosseneCards.map(b => renderCard(b)).join('');
+  }
+
+  document.getElementById('main-content').innerHTML = html;
+}
+
+function renderCard(b) {
+  const flaeche = BADI_FLAECHEN[b.name] || 5000;
+  const m2 = b.gaeste ? Math.round(flaeche / b.gaeste) : null;
+  const status = m2 ? getStatus(m2) : null;
+  const bar = m2 ? Math.min(100, Math.round(m2 / 2)) : 0;
+
+  const m2html = m2
+    ? `<div class="m2-val">${formatM2(m2)}</div><div class="m2-label">m²/Person</div>`
+    : `<div class="m2-val" style="color:var(--gray)">–</div>`;
+
+  const badgeHtml = b.offen
+    ? (status ? `<span class="badge ${status.cls}">${status.label}</span>` : `<span class="badge badge-gray">Keine Zählung</span>`)
+    : `<span class="badge badge-gray">Geschlossen</span>`;
+
+  const tempHtml = b.temp ? `<span class="temp-chip">💧 ${parseFloat(b.temp).toFixed(1)}°C</span>` : '';
+  const hintHtml = b.hinweis ? `<div class="hint">${b.hinweis}</div>` : '';
+
+  const accentColor = !b.offen ? '#ccc' : (status?.dot || '#ccc');
+  const barColor = status?.dot || '#ccc';
+
+  const guestStr = b.gaeste
+    ? `${b.gaeste} Gäste`
+    : (b.offen ? 'Keine Gästezählung' : 'Geschlossen');
+  const flaecheStr = flaeche >= 1000 ? `${Math.round(flaeche/1000)}'000 m²` : `${flaeche} m²`;
+
+  return `
+  <div class="card ${!b.offen ? 'closed' : ''}">
+    <div class="card-accent" style="background:${accentColor}"></div>
+    <div class="card-top">
+      <div class="card-name">${b.name}</div>
+      <div class="card-m2">${m2html}</div>
+    </div>
+    <div class="card-meta">
+      ${badgeHtml}
+      ${tempHtml}
+    </div>
+    ${hintHtml}
+    ${m2 ? `
+    <div class="bar-track">
+      <div class="bar-fill" style="width:${bar}%;background:${barColor};"></div>
+    </div>` : ''}
+    <div class="guests-row">
+      <span>${guestStr}</span>
+      <span>${flaecheStr}</span>
+    </div>
+  </div>`;
+}
+
+// Hardcoded latest data as fallback (from scrape)
+const FALLBACK_DATA = [
+  { name:"Flussbad Au-Höngg",           offen:true,  gaeste:null, temp:17, hinweis:"Bad ist gut besucht" },
+  { name:"Flussbad Oberer Letten",       offen:false, gaeste:null, temp:17, hinweis:"" },
+  { name:"Flussbad Unterer Letten",      offen:false, gaeste:null, temp:23, hinweis:"" },
+  { name:"Flussbad Unterer Letten (Flussteil)", offen:false, gaeste:null, temp:18, hinweis:"" },
+  { name:"Frauenbad Stadthausquai",      offen:true,  gaeste:53,   temp:17, hinweis:"" },
+  { name:"Freibad Allenmoos",            offen:false, gaeste:null, temp:23, hinweis:"" },
+  { name:"Freibad Auhof",                offen:false, gaeste:null, temp:25, hinweis:"" },
+  { name:"Freibad Dolder",               offen:false, gaeste:null, temp:12, hinweis:"Saisonstart voraussichtlich Juni" },
+  { name:"Freibad Heuried",              offen:false, gaeste:null, temp:25, hinweis:"" },
+  { name:"Freibad Letzigraben",          offen:true,  gaeste:64,   temp:24, hinweis:"" },
+  { name:"Freibad Seebach",              offen:true,  gaeste:27,   temp:24, hinweis:"bis 21:00 Uhr" },
+  { name:"Freibad Zwischen den Hölzern", offen:false, gaeste:null, temp:24, hinweis:"" },
+  { name:"Männerbad Schanzengraben",     offen:true,  gaeste:null, temp:18, hinweis:"" },
+  { name:"Seebad Enge",                  offen:false, gaeste:null, temp:20, hinweis:"" },
+  { name:"Seebad Katzensee",             offen:false, gaeste:null, temp:24, hinweis:"" },
+  { name:"Seebad Utoquai",               offen:true,  gaeste:168,  temp:18, hinweis:"" },
+  { name:"Strandbad Mythenquai",         offen:true,  gaeste:31,   temp:19, hinweis:"" },
+  { name:"Strandbad Tiefenbrunnen",      offen:false, gaeste:null, temp:18, hinweis:"" },
+  { name:"Strandbad Wollishofen",        offen:false, gaeste:null, temp:20, hinweis:"" },
+];
+
+async function loadAndRender() {
+  document.getElementById('main-content').innerHTML = `
+    <div class="loading"><div class="loader"></div><p>Daten werden geladen…</p></div>`;
+
+  let data = await fetchData();
+
+  // If API returned nothing useful, use fallback
+  if (!Array.isArray(data) || data.length === 0) {
+    data = FALLBACK_DATA;
+    document.getElementById('timestamp').textContent =
+      '⚠ Live-API nicht verfügbar · Letzte bekannte Daten';
+  }
+
+  renderStatic(data);
+}
+
+document.getElementById('refresh-btn').addEventListener('click', loadAndRender);
+
+// PWA install prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('install-banner').style.display = 'flex';
+});
+
+document.getElementById('install-btn')?.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  document.getElementById('install-banner').style.display = 'none';
+});
+
+document.getElementById('dismiss-banner')?.addEventListener('click', () => {
+  document.getElementById('install-banner').style.display = 'none';
+});
+
+// Auto-refresh every 5 minutes
+setInterval(loadAndRender, 5 * 60 * 1000);
+
+
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
+
+// Initial load
+loadAndRender();
+</script>
+</body>
+</html>
