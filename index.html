@@ -104,23 +104,23 @@ const NAMES = {
 // Liegewiesenflächen in m² (Gesamtareal minus Becken/Gebäude/Wege)
 // Berechnung: OSM-Gesamtareal × geschätzter Liegewiesen-Anteil
 const FL = {
-  "Flussbad Oberer Letten":          3678,  // OSM 12'261 × 30% (Steg+Fluss dominiert)
+  "Flussbad Oberer Letten":          2200,  // Flusssteg, kaum Liegewiese
   "Flussbad Unterer Letten":         2800,  // geschätzt
   "Flussbad Unterer Letten (Flussteil)": 800, // geschätzt
   "Frauenbad Stadthausquai":          659,  // gemessen (Nutzer)
   "Männerbad Schanzengraben":         879,  // OSM 1'758 × 50%
-  "Freibad Allenmoos":              17434,  // OSM 41'509 × 42%
-  "Freibad Auhof":                   9462,  // OSM 18'924 × 50%
-  "Freibad Heuried":                10449,  // OSM 18'999 × 55%
-  "Freibad Letzigraben":            15527,  // OSM 34'505 × 45%
-  "Freibad Seebach":                10998,  // OSM 21'996 × 50%
-  "Freibad Zwischen den Hölzern":   10756,  // OSM 21'512 × 50%
-  "Seebad Enge":                     2500,  // geschätzt
+  "Freibad Allenmoos":              38000,  // Angabe Nutzer
+  "Freibad Auhof":                  15400,  // OSM 18'924 − Becken/Gebäude
+  "Freibad Heuried":                20000,  // Angabe Nutzer
+  "Freibad Letzigraben":            23000,  // Mittelwert verschiedener Quellen
+  "Freibad Seebach":                17500,  // Angabe Nutzer
+  "Freibad Zwischen den Hölzern":   17500,  // OSM 21'512 − Becken/Gebäude
+  "Seebad Enge":                      900,  // Kastenbad, hauptsächlich Holzsteg
   "Seebad Katzensee":                5094,  // OSM 7'277 × 70%
-  "Seebad Utoquai":                  2000,  // geschätzt
-  "Strandbad Mythenquai":           24000,  // OSM ~40'000 × 60%
-  "Strandbad Tiefenbrunnen":        26021,  // OSM 47'311 × 55%
-  "Strandbad Wollishofen":           2475,  // OSM 3'536 × 70%
+  "Seebad Utoquai":                   900,  // Kastenbad, gleicher Typ wie Seebad Enge
+  "Strandbad Mythenquai":           12000,  // ~400m × ~30m Strandstreifen
+  "Strandbad Tiefenbrunnen":        21000,  // Angabe Nutzer
+  "Strandbad Wollishofen":           5000,  // Angabe Nutzer
 };
 
 let liveData = {}, tempStatus = {}, ws = null, retryTimer = null;
