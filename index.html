@@ -83,7 +83,8 @@
     .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:14px}
     .spin2{width:22px;height:22px;border:1.5px solid var(--mist);border-top-color:var(--moss);border-radius:50%;animation:rot .8s linear infinite}
     .loading p{font-size:11px;color:var(--sage);font-family:var(--mono);text-align:center;line-height:1.8}
-    .weather{background:var(--card);border-radius:10px;box-shadow:0 1px 4px var(--shad),0 0 0 1px rgba(61,79,54,.06);padding:14px;margin-bottom:12px;display:flex;align-items:center;gap:12px}
+    .weather-container{display:grid;grid-template-columns:1fr;gap:1px;background:var(--mist);max-width:560px;margin:0 auto;margin-bottom:12px}
+    .weather{background:var(--card);border-radius:10px;box-shadow:0 1px 4px var(--shad),0 0 0 1px rgba(61,79,54,.06);padding:14px;display:flex;align-items:center;gap:12px}
     .weather-icon{font-size:36px;flex-shrink:0}
     .weather-info{flex:1}
     .weather-temp{font-family:var(--serif);font-size:24px;font-weight:500;color:var(--moss);line-height:1}
@@ -351,7 +352,7 @@ function render() {
 
   // Wetter-Anzeige
   const wetterHtml = wetter
-    ? `<div class="weather"><div class="weather-icon">${wetter.icon}</div><div class="weather-info"><div class="weather-temp">${wetter.temp}°</div><div class="weather-desc">${wetter.desc}</div></div></div>`
+    ? `<div class="weather-container"><div class="weather"><div class="weather-icon">${wetter.icon}</div><div class="weather-info"><div class="weather-temp">${wetter.temp}°</div><div class="weather-desc">${wetter.desc}</div></div></div></div>`
     : '';
   document.getElementById('weather').innerHTML = wetterHtml;
 
