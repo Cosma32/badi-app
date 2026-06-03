@@ -493,8 +493,8 @@ function manualRefresh() {
   // 1. WS sofort starten — parallel zu allem anderen
   connectWS();
   
-  // 1b. Wetter sofort laden
-  fetchWetter();
+  // 1b. Wetter sofort laden (warten!)
+  await fetchWetter();
 
   // 2. Cache sofort rendern falls vorhanden (< 1ms)
   const cached = getCached();
@@ -511,11 +511,11 @@ function manualRefresh() {
   // 3. Frische Daten im Hintergrund holen (auch wenn Cache genutzt)
   loadStadt(true, false);
 
-  // 4. Alle 2 Minuten aktualisieren
+  // 4. Alle 10 Sekunden aktualisieren
   setInterval(() => loadStadt(true, false), 10 * 1000);
   
-  // 4b. Wetter alle 10 Minuten aktualisieren
-  setInterval(fetchWetter, 10 * 60 * 1000);
+  // 4b. Wetter alle 5 Minuten aktualisieren
+  setInterval(fetchWetter, 5 * 60 * 1000);
 })();
 
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
