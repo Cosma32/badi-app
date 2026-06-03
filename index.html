@@ -83,11 +83,12 @@ nein <!DOCTYPE html>
     .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:14px}
     .spin2{width:22px;height:22px;border:1.5px solid var(--mist);border-top-color:var(--moss);border-radius:50%;animation:rot .8s linear infinite}
     .loading p{font-size:11px;color:var(--sage);font-family:var(--mono);text-align:center;line-height:1.8}
-    .weather-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--mist);max-width:560px;margin:0 auto;margin-bottom:12px}
-    .weather{background:var(--linen);padding:14px 8px 12px;text-align:center}
+    .weather-stats{background:var(--mist);max-width:560px;margin:0 auto;margin-bottom:12px}
+    .weather{background:var(--linen);padding:14px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .weather-left{display:flex;align-items:center;gap:8px}
     .weather-icon{font-size:36px}
     .weather-temp{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--moss);line-height:1}
-    .weather-desc{font-size:9px;color:var(--sage);margin-top:4px;font-weight:500;text-transform:uppercase;letter-spacing:1.2px}
+    .weather-desc{font-size:9px;color:var(--sage);font-weight:500;text-transform:uppercase;letter-spacing:1.2px}
   </style>
 </head>
 <body>
@@ -349,9 +350,7 @@ function render() {
 
   // Wetter-Anzeige
   const wetterHtml = wetter
-    ? `<div class="weather"><div class="weather-icon">${wetter.icon}</div></div>
-       <div class="weather"><div class="weather-temp">${wetter.temp}°</div></div>
-       <div class="weather"><div class="weather-desc">${wetter.desc}</div></div>`
+    ? `<div class="weather"><div class="weather-left"><div class="weather-icon">${wetter.icon}</div><div class="weather-temp">${wetter.temp}°</div></div><div class="weather-desc">${wetter.desc}</div></div>`
     : '';
   document.getElementById('weather').innerHTML = wetterHtml;
 
