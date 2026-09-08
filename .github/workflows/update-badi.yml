@@ -1,0 +1,39 @@
+name: Badi-Daten aktualisieren
+
+on:
+  schedule:
+    # Alle 10 Minuten (UTC). GitHub kann die Ausführung um einige Minuten verzögern.
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Manuell im Actions-Tab startbar
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-badi
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Daten holen und data/badi.json schreiben
+        run: node scripts/update-badi.js
+
+      - name: Änderungen committen
+        run: |
+          if git diff --quiet -- data/badi.json; then
+            echo "Keine Änderung – nichts zu committen."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/badi.json
+          git commit -m "Badi-Daten aktualisiert: $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
