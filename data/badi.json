@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-08T09:14:55.304Z",
+ "stand": "2026-09-08T13:05:25.287Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -15,7 +15,7 @@
    "temp": 23,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "bis 19Uhr",
    "uid": "flb6939"
   },
   {
@@ -95,7 +95,7 @@
    "temp": 22,
    "offen": true,
    "status": "offen",
-   "hinweis": "Grillstellen gesperrt, absolutes Feuerverbot. Waldbrandgefahr!",
+   "hinweis": "bis 19:00 Uhr , letzter Einlass um 18.30 Uhr.",
    "uid": "fb018"
   },
   {
@@ -116,23 +116,23 @@
   },
   {
    "name": "Seebad Katzensee",
-   "temp": 23,
+   "temp": 24,
    "offen": true,
    "status": "offen",
-   "hinweis": "Bad ist wenig besucht. Feuerverbot, Grillstellen gesperrt.",
+   "hinweis": "Grillstellen gesperrt, Feuerverbot, Bad ist gut besucht",
    "uid": null
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 22,
+   "temp": 23,
    "offen": true,
    "status": "offen",
-   "hinweis": "Letzter Einlass 18:30 Uhr",
+   "hinweis": "",
    "uid": "SSD-10"
   },
   {
    "name": "Strandbad Mythenquai",
-   "temp": 24,
+   "temp": 25,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -140,18 +140,18 @@
   },
   {
    "name": "Strandbad Tiefenbrunnen",
-   "temp": 24,
+   "temp": 25,
    "offen": true,
    "status": "offen",
-   "hinweis": "5m Sprungturm gesperrt, 3m Sprungturm und Rutschbahn wegen tiefem Seepegel gesperrt.",
+   "hinweis": "bis 19:00 Uhr, 5m Sprungturm gesperrt, 3m Sprungturm und Rutschbahn wegen tiefem Seepegel gesperrt.",
    "uid": "seb6947"
   },
   {
    "name": "Strandbad Wollishofen",
-   "temp": 24,
+   "temp": 25,
    "offen": true,
    "status": "offen",
-   "hinweis": "Aufgrund des niedrigen Wasserstandes ist der Sprungturm gesperrt.",
+   "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr. Aufgrund des niedrigen Wasserstandes ist der Sprungturm gesperrt.",
    "uid": "seb6948"
   }
  ],
