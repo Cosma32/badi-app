@@ -115,6 +115,485 @@
 </div>
 <script>
 // ─── KONSTANTEN ───────────────────────────────────────────────────────────────
+// Status + Wassertemperatur kommen aus data/badi.json im eigenen Repo.
+// Die Datei wird von der GitHub Action .github/workflows/update-badi.yml
+// alle ~10 Minuten aus der Stadtseite erzeugt – darum braucht es keinen
+// CORS-Proxy mehr (die waren die Ursache des Ladefehlers).
+const DATA_URL = 'data/badi.json';
+
+const FL = {
+  "Flussbad Au-Höngg":1200,"Flussbad Oberer Letten":2200,"Flussbad Unterer Letten":2800,
+  "Flussbad Unterer Letten (Flussteil)":800,"Frauenbad Stadthausquai":659,
+  "Männerbad Schanzengraben":879,"Freibad Allenmoos":38000,"Freibad Auhof":15400,
+  "Freibad Dolder":8000,"Freibad Heuried":20000,"Freibad Letzigraben":23000,
+  "Freibad Seebach":17500,"Freibad Zwischen den Hölzern":17500,
+  "Seebad Enge":900,"Seebad Katzensee":5094,"Seebad Utoquai":900,
+  "Strandbad Mythenquai":12000,"Strandbad Tiefenbrunnen":21000,"Strandbad Wollishofen":5000,
+};
+const HALL_POOLS = {
+  "Hallenbad City":[{l:"25m-Becken",t:27.5},{l:"Sportbecken",t:30},{l:"Lehrschwimmbecken",t:32},{l:"Whirlpool",t:36},{l:"Dampfbad",t:45}],
+  "Hallenbad Bläsi":[{l:"25m-Becken",t:27},{l:"Lehrschwimmbecken",t:32}],
+  "Hallenbad Bungertwies":[{l:"25m-Becken",t:27},{l:"Lehrschwimmbecken",t:32}],
+  "Hallenbad Leimbach":[{l:"Becken",t:28},{l:"Lehrschwimmbecken",t:32}],
+  "Hallenbad Oerlikon":[{l:"25m-Becken",t:27},{l:"Lehrschwimmbecken",t:32}],
+  "Wärmebad Käferberg":[{l:"Warmwasserbecken",t:34},{l:"Aussenbecken",t:30}],
+};
+const HALL_MAX = {
+  "Hallenbad City":220,"Hallenbad Bläsi":120,"Hallenbad Bungertwies":100,
+  "Hallenbad Leimbach":80,"Hallenbad Oerlikon":150,"Wärmebad Käferberg":60,
+};
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let stadtBaeder    = [];   // [{name, temp, offen, hinweis, uid}]
+let stadtHallen    = [];   // [{name, uid}]
+let wsGaeste       = {};   // uid -> {gaeste, maxspace}
+let stand          = null; // Zeitstempel der JSON-Daten
+let wetter         = null; // {temp, condition}
+let firstRenderDone = false;
+
+// ─── BADGES ───────────────────────────────────────────────────────────────────
+function bdgM2(m2){
+  if(m2>=200)return{c:'g',l:'Quasi leer',d:'#4a7c5f'};
+  if(m2>=50) return{c:'g',l:'Sehr viel Platz',d:'#5a8a6a'};
+  if(m2>=15) return{c:'w',l:'Viel Platz',d:'#3d6080'};
+  if(m2>=5)  return{c:'a',l:'Mässig voll',d:'#8b6020'};
+  return          {c:'r',l:'Sehr voll',d:'#8b2020'};
+}
+function bdgPct(pct){
+  if(pct==null)return{c:'gr',l:'–',d:'#8a8680'};
+  if(pct<=30)  return{c:'g',l:'Quasi leer',d:'#4a7c5f'};
+  if(pct<=55)  return{c:'g',l:'Viel Platz',d:'#5a8a6a'};
+  if(pct<=75)  return{c:'w',l:'Mässig voll',d:'#3d6080'};
+  if(pct<=90)  return{c:'a',l:'Fast voll',d:'#8b6020'};
+  return           {c:'r',l:'Sehr voll',d:'#8b2020'};
+}
+
+// ─── DATEN LADEN (Status + Temperatur aus data/badi.json) ─────────────────────
+const CACHE_KEY = 'badi_data_v2';
+
+function getCached() {
+  try { return JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); } catch(e) { return null; }
+}
+function setCache(data) {
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function applyData(data) {
+  if (!data || !Array.isArray(data.freibaeder) || !data.freibaeder.length) {
+    throw new Error('Keine Daten in badi.json');
+  }
+  stadtBaeder = data.freibaeder;
+  stadtHallen = data.hallenbaeder || [];
+  stand = data.stand || null;
+}
+
+async function fetchStadtseite() {
+  // Cache-Buster, damit weder Browser noch Service-Worker eine alte Datei liefern
+  const res = await fetch(DATA_URL + '?t=' + Date.now(), {
+    cache: 'no-store',
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const data = await res.json();
+  applyData(data);
+  setCache(data);
+  return true;
+}
+
+// ─── WETTER LADEN ─────────────────────────────────────────────────────────────
+async function fetchWetter() {
+  try {
+    const resp = await fetch('https://api.open-meteo.com/v1/forecast?latitude=47.3769&longitude=8.5472&current=temperature_2m,weather_code&timezone=Europe/Zurich', {signal: AbortSignal.timeout(5000)});
+    const data = await resp.json();
+    const curr = data.current;
+    if (curr) {
+      const code = curr.weather_code || 0;
+      let icon = '☀️', desc = 'Sonnig';
+      if (code === 0 || code === 1) { icon = '☀️'; desc = 'Sonnig'; }
+      else if (code === 2) { icon = '⛅'; desc = 'Teilweise bewölkt'; }
+      else if (code === 3) { icon = '☁️'; desc = 'Bewölkt'; }
+      else if (code >= 45 && code <= 48) { icon = '🌫️'; desc = 'Nebel'; }
+      else if (code >= 50 && code <= 67) { icon = '🌧️'; desc = 'Regen'; }
+      else if (code >= 71 && code <= 77) { icon = '❄️'; desc = 'Schnee'; }
+      else if (code >= 80 && code <= 82) { icon = '🌧️'; desc = 'Regenschauer'; }
+      else if (code >= 85 && code <= 86) { icon = '❄️'; desc = 'Schneeschauer'; }
+      else if (code >= 95 && code <= 99) { icon = '⛈️'; desc = 'Gewitter'; }
+      wetter = { temp: Math.round(curr.temperature_2m), icon, desc };
+    }
+  } catch(e) { console.warn('Wetter-Fehler:', e.message); }
+}
+
+// ─── WEBSOCKET (Live-Gäste alle ~10 Sek) ──────────────────────────────────────
+let ws = null, wsRetry = null, wsLastMsg = 0;
+
+function connectWS() {
+  if (wsRetry) { clearTimeout(wsRetry); wsRetry = null; }
+  try { ws && ws.readyState < 2 && ws.close(); } catch(e) {}
+
+  ws = new WebSocket('wss://badi-public.crowdmonitor.ch:9591/api');
+
+  ws.onopen = () => {
+    ws.send('');
+    // Ping alle 10 Sekunden um neue Daten zu bekommen
+    ws._ping = setInterval(() => {
+      if (ws.readyState === 1) ws.send('');
+    }, 10000);
+  };
+
+  ws.onmessage = (e) => {
+    try {
+      const arr = JSON.parse(e.data);
+      if (!Array.isArray(arr) || !arr[0]?.uid) return;
+      // Nach UID ablegen – die UIDs stehen in badi.json und kommen direkt
+      // von der Stadtseite, es braucht also keine Namensliste im Code mehr.
+      arr.forEach(item => {
+        if (!item.uid) return;
+        wsGaeste[item.uid] = {
+          gaeste:   parseInt(item.currentfill) || 0,
+          maxspace: parseInt(item.maxspace) || 0,
+        };
+      });
+      wsLastMsg = Date.now();
+      render();
+    } catch(ex) {}
+  };
+
+  ws.onclose = () => {
+    if (ws._ping) clearInterval(ws._ping);
+    wsRetry = setTimeout(connectWS, 4000);
+  };
+  ws.onerror = () => {};
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function render() {
+  if (!stadtBaeder.length && !stadtHallen.length) return;
+
+  // Freibäder: Live-Gäste aus dem WebSocket über die UID dazumischen
+  const fb = stadtBaeder.map(b => {
+    const ws = wsGaeste[b.uid] || {};
+    return { ...b, gaeste: ws.gaeste ?? null, maxspace: ws.maxspace ?? 0 };
+  });
+
+  // Hallenbäder: gleich, mit HALL_MAX als Reserve für die Kapazität
+  const hb = stadtHallen.map(b => {
+    const ws = wsGaeste[b.uid] || {};
+    const gaeste = ws.gaeste ?? null;
+    const maxspace = ws.maxspace || HALL_MAX[b.name] || 150;
+    return { ...b, gaeste, maxspace };
+  });
+
+  // Statistiken (nur Freibäder)
+  const offene = fb.filter(b => b.offen);
+  const mitGaeste = fb.filter(b => b.gaeste != null && b.gaeste > 0);
+  const total = mitGaeste.reduce((s, b) => s + b.gaeste, 0);
+  const wm = mitGaeste.filter(b => FL[b.name]);
+  const avgM2 = wm.length ? Math.round(wm.reduce((s,b) => s + FL[b.name]/b.gaeste, 0) / wm.length) : 0;
+
+  const now = new Date();
+  const zeitStr = now.toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+  setDot('live', 'Live · ' + zeitStr);
+  // Gästezahlen sind live (WebSocket), Temperatur/Status stammen aus badi.json
+  const standStr = stand
+    ? new Date(stand).toLocaleTimeString('de-CH', {hour:'2-digit', minute:'2-digit'})
+    : null;
+  document.getElementById('ts').textContent = standStr
+    ? 'Gäste live · Wasser/Status ' + standStr + ' Uhr'
+    : 'Stand ' + zeitStr + ' Uhr';
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="sv">${offene.length}<small>/${fb.length}</small></div><div class="sl">Freibäder offen</div></div>
+    <div class="stat"><div class="sv">${total ? total.toLocaleString('de-CH') : '–'}</div><div class="sl">Gäste total</div></div>
+    <div class="stat"><div class="sv">${avgM2 || '–'}</div><div class="sl">Ø m² / Pers.</div></div>`;
+
+  // Wetter-Anzeige
+  const wetterHtml = wetter
+    ? `<div class="weather-left"><div class="weather-icon">${wetter.icon}</div><div class="weather-temp">${wetter.temp}°</div><div class="weather-desc">${wetter.desc}</div></div>`
+    : '';
+  document.getElementById('weather').innerHTML = wetterHtml;
+
+  // Sortierung: offen zuerst, dann nach m²/Person (luftigste zuerst)
+  const sorted = [...fb].sort((a, b) => {
+    if (a.offen && !b.offen) return -1;
+    if (!a.offen && b.offen) return 1;
+    const ma = a.gaeste > 0 && FL[a.name] ? FL[a.name] / a.gaeste : -1;
+    const mb = b.gaeste > 0 && FL[b.name] ? FL[b.name] / b.gaeste : -1;
+    return mb - ma;
+  });
+
+  const open   = sorted.filter(b => b.offen);
+  const closed = sorted.filter(b => !b.offen);
+
+  let html = '';
+  if (open.length)   { html += `<div class="sec">Geöffnet · ${open.length}</div>`;     html += open.map(freibadCard).join(''); }
+  if (closed.length) { html += `<div class="sec">Geschlossen · ${closed.length}</div>`; html += closed.map(freibadCard).join(''); }
+  if (hb.length)     { html += `<div class="sec">Hallenbäder</div>`;                    html += hb.map(hallCard).join(''); }
+
+  document.getElementById('main').innerHTML = html;
+  firstRenderDone = true;
+}
+
+// ─── KARTEN ───────────────────────────────────────────────────────────────────
+function freibadCard(b) {
+  const fl  = FL[b.name];
+  const m2  = (b.gaeste > 0 && fl) ? Math.round(fl / b.gaeste) : null;
+  const s   = m2 ? bdgM2(m2) : null;
+  const pct = b.maxspace > 0 ? Math.round(b.gaeste / b.maxspace * 100) : null;
+  const bar = m2 ? Math.min(100, Math.round(m2 / 2)) : 0;
+  const acc = !b.offen ? '#c9d5be' : (s?.d || '#c9d5be');
+
+  const m2h = m2
+    ? `<div class="mv">${m2 > 999 ? m2.toLocaleString('de-CH') : m2}<span class="mv-u"> m²</span></div><div class="ml">Liegewiese / Person</div>`
+    : `<div style="color:var(--mist);font-size:13px;padding-top:3px">–</div>`;
+
+  const statusBdg = !b.offen
+    ? `<span class="bdg gr">Geschlossen</span>`
+    : (s ? `<span class="bdg ${s.c}">${s.l}</span>` : `<span class="bdg gr">Keine Zählung</span>`);
+
+  const tmpChip = b.temp != null
+    ? `<span class="tmp"><span class="tmp-dot"></span>${b.temp} °C</span>` : '';
+
+  const hint    = b.hinweis ? `<div class="hint">${b.hinweis}</div>` : '';
+  const fl_str  = fl ? (fl >= 1000 ? Math.round(fl/1000) + "'000" : fl) + ' m²' : '';
+  const gaesteTxt = b.gaeste > 0 ? b.gaeste.toLocaleString('de-CH') + ' Gäste' : (b.offen ? 'Keine Zählung' : '');
+  const cap = pct != null ? `<div class="cap">${pct}% belegt · ${(b.maxspace - b.gaeste).toLocaleString('de-CH')} Plätze frei</div>` : '';
+
+  return `<div class="card${!b.offen ? ' closed' : ''}">
+    <div class="acc" style="background:${acc}"></div>
+    <div class="ct"><div class="cn">${b.name}</div><div style="text-align:right;flex-shrink:0">${m2h}</div></div>
+    <div class="meta">${statusBdg}${tmpChip}</div>
+    ${hint}
+    ${m2 ? `<div class="bar"><div class="barf" style="width:${bar}%;background:${s.d}"></div></div>` : '<div style="height:6px"></div>'}
+    <div class="gr2"><span>${gaesteTxt}</span><span>${fl_str}</span></div>
+    ${cap}
+  </div>`;
+}
+
+function hallCard(b) {
+  const pct  = (b.gaeste != null && b.maxspace > 0) ? Math.round(b.gaeste / b.maxspace * 100) : null;
+  const s    = bdgPct(pct);
+  const pools = HALL_POOLS[b.name] || [];
+
+  const barHtml = pct != null
+    ? `<div class="bar"><div class="barf" style="width:${Math.min(100,pct)}%;background:${s.d}"></div></div>
+       <div class="gr2"><span>${b.gaeste.toLocaleString('de-CH')} Gäste</span><span>${pct}% belegt</span></div>
+       <div class="cap">${Math.max(0, b.maxspace - b.gaeste)} Plätze frei</div>`
+    : `<div style="height:6px"></div><div class="gr2" style="font-style:italic">Auslastung lädt…</div>`;
+
+  const occBdg = pct != null ? `<span class="bdg ${s.c}">${s.l}</span>` : '';
+  const poolsHtml = pools.length
+    ? `<div class="pools">${pools.map(p =>
+        `<div class="pool"><div class="pool-name">${p.l}</div>
+        <span class="pool-temp">${p.t}</span><span class="pool-unit"> °C</span></div>`).join('')}</div>` : '';
+
+  return `<div class="card">
+    <div class="acc" style="background:${s.d}"></div>
+    <div class="ct">
+      <div class="cn">${b.name}${b.name === 'Hallenbad City' ? '<div class="cn-sub">Sihlstrasse 71 · Kreis 1</div>' : ''}</div>
+      ${pct != null
+        ? `<div style="text-align:right;flex-shrink:0"><div class="mv">${pct}<span class="mv-u">%</span></div><div class="ml">Auslastung</div></div>`
+        : `<div style="text-align:right;flex-shrink:0;color:var(--sage);font-size:10px;padding-top:2px">Ganzjährig<br>geöffnet</div>`}
+    </div>
+    <div class="meta"><span class="bdg g">Ganzjährig geöffnet</span>${occBdg}</div>
+    ${barHtml}
+    ${poolsHtml}
+  </div>`;
+}
+
+// ─── UI HELPERS ───────────────────────────────────────────────────────────────
+function setDot(cls, txt) {
+  document.getElementById('dot').className = 'dot' + (cls ? ' ' + cls : '');
+  document.getElementById('subtext').textContent = txt;
+}
+
+function showLoading(msg) {
+  if (!firstRenderDone) {
+    document.getElementById('main').innerHTML =
+      `<div class="loading"><div class="spin2"></div><p>${msg}</p></div>`;
+  }
+}
+
+function showError(msg) {
+  if (!firstRenderDone) {
+    document.getElementById('main').innerHTML =
+      `<div class="loading"><p style="color:var(--red);text-align:center;line-height:1.8">${msg}<br>
+      <span style="font-size:10px;color:var(--sage)">Wird in 30s nochmals versucht.</span></p></div>`;
+  }
+}
+
+// ─── HAUPTLOGIK ───────────────────────────────────────────────────────────────
+async function loadStadt() {
+  try {
+    await fetchStadtseite();
+    setDot('live', 'Live');
+    render();
+    return true;
+  } catch(e) {
+    console.warn('Daten laden fehlgeschlagen:', e.message);
+    if (!firstRenderDone) {
+      setDot('', 'Fehler – tippe zum Wiederholen');
+      showError('Daten konnten nicht geladen werden.');
+    }
+    return false;
+  }
+}
+
+function manualRefresh() {
+  document.getElementById('rbtn').classList.add('spin');
+  loadStadt().finally(() => {
+    document.getElementById('rbtn').classList.remove('spin');
+  });
+}
+
+// ─── START ────────────────────────────────────────────────────────────────────
+(async () => {
+  // 1. WS sofort starten — parallel zu allem anderen
+  connectWS();
+  
+  // 1b. Wetter sofort laden (warten!)
+  await fetchWetter();
+
+  // 2. Letzte bekannte Daten sofort rendern, damit nie ein leerer Screen steht
+  const cached = getCached();
+  if (cached) {
+    try {
+      applyData(cached);
+      render();
+      setDot('live', 'Live (Cache)');
+    } catch(e) {}
+  } else {
+    showLoading('Lade…');
+  }
+
+  // 3. Frische Daten holen
+  loadStadt();
+
+  // 4. badi.json wird alle ~10 Min neu gebaut – alle 2 Minuten nachschauen reicht
+  setInterval(loadStadt, 2 * 60 * 1000);
+
+  // 4b. Wetter alle 5 Minuten aktualisieren
+  setInterval(fetchWetter, 5 * 60 * 1000);
+})();
+
+// Relativer Pfad: die App liegt unter /badi-app/, '/sw.js' lief ins Leere (404).
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f0ede4">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Badi Zürich">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="badi-app/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="badi-app/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Jost:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <title>Badi Zürich</title>
+  <style>
+    :root {
+      --linen:#f0ede4; --linen2:#e8e4da; --moss:#3d4f36; --sage:#7a8f6e; --mist:#c9d5be;
+      --card:#faf9f6; --shad:rgba(61,79,54,0.08);
+      --green:#2d5a3d; --green-bg:#eaf2ec;
+      --amber:#7a5020; --amber-bg:#f7f0e6;
+      --red:#7a2020;   --red-bg:#f5eaea;
+      --blue:#1a3a5c;  --blue-bg:#eaf0f7;
+      --gray:#8a8680;  --gray-bg:#edebe4;
+      --serif:'Playfair Display',Georgia,serif;
+      --sans:'Jost',sans-serif;
+      --mono:'DM Mono',monospace;
+      --st:env(safe-area-inset-top,0px); --sb:env(safe-area-inset-bottom,0px);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    body{font-family:var(--sans);background:var(--linen);color:var(--moss);min-height:100dvh;overscroll-behavior:none}
+    .hdr{background:var(--linen);border-bottom:1px solid var(--mist);padding:calc(var(--st)+16px) 18px 14px;position:sticky;top:0;z-index:100}
+    .hdr-in{display:flex;align-items:center;justify-content:center;max-width:560px;margin:0 auto;gap:12px;position:relative}
+    .hdr-in>div{flex:1;text-align:center}
+    .title{font-family:var(--serif);font-size:32px;font-weight:500;color:var(--moss)}
+    .subtitle{font-family:var(--serif);font-size:16px;font-weight:400;color:var(--moss);margin-top:12px}
+    .sub{font-family:var(--mono);font-size:10px;color:var(--sage);margin-top:24px;display:flex;align-items:center;gap:5px}
+    .dot{width:6px;height:6px;border-radius:50%;background:var(--gray);flex-shrink:0;transition:background .3s}
+    .dot.live{background:var(--moss);animation:pulse 2.5s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+    .rbtn{background:transparent;border:1px solid var(--mist);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+    .rbtn:active{background:var(--linen2)}
+    .rbtn.spin svg{animation:rot .7s linear infinite}
+    @keyframes rot{to{transform:rotate(360deg)}}
+    .rbtn svg{width:15px;height:15px;stroke:var(--moss);fill:none}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--mist);max-width:560px;margin:0 auto}
+    .stat{background:var(--linen);padding:14px 8px 12px;text-align:center}
+    .sv{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--moss);line-height:1}
+    .sv small{font-size:13px;color:var(--sage);font-family:var(--sans);font-weight:300}
+    .sl{font-size:9px;color:var(--sage);margin-top:4px;text-transform:uppercase;letter-spacing:1.2px;font-weight:500}
+    .ts{font-family:var(--mono);font-size:10px;color:var(--sage);text-align:right;padding:8px 18px 0;max-width:560px;margin:0 auto}
+    .content{padding:0 0 calc(var(--sb)+40px)}
+    .inner{max-width:560px;margin:0 auto;padding:0 12px}
+    .sec{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.8px;color:var(--sage);padding:18px 0 8px}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 1px 4px var(--shad),0 0 0 1px rgba(61,79,54,.06);padding:13px 14px 12px;margin-bottom:8px;position:relative;overflow:hidden}
+    .card.closed{opacity:.42}
+    .acc{position:absolute;left:0;top:0;bottom:0;width:3px}
+    .ct{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+    .cn{font-size:14px;font-weight:500;color:var(--moss);line-height:1.3;flex:1}
+    .cn-sub{font-size:10px;color:var(--sage);font-weight:400;margin-top:1px}
+    .mv{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--moss);line-height:1;text-align:right;white-space:nowrap}
+    .mv-u{font-size:10px;color:var(--sage);font-family:var(--sans);font-weight:300}
+    .ml{font-size:9px;color:var(--sage);text-align:right;margin-top:2px}
+    .meta{display:flex;align-items:center;gap:5px;margin-top:8px;flex-wrap:wrap}
+    .bdg{font-size:10px;font-weight:500;padding:3px 8px;border-radius:3px;letter-spacing:.2px}
+    .g{background:var(--green-bg);color:var(--green)}
+    .a{background:var(--amber-bg);color:var(--amber)}
+    .r{background:var(--red-bg);color:var(--red)}
+    .gr{background:var(--gray-bg);color:var(--gray)}
+    .w{background:var(--blue-bg);color:var(--blue)}
+    .tmp{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--moss);background:rgba(201,213,190,.3);padding:3px 8px;border-radius:3px;border:1px solid var(--mist)}
+    .tmp-dot{width:5px;height:5px;border-radius:50%;background:var(--sage);flex-shrink:0}
+    .hint{font-size:10px;color:var(--sage);font-style:italic;margin-top:5px;line-height:1.4}
+    .bar{background:var(--linen2);border-radius:2px;height:3px;margin:9px 0 4px;overflow:hidden}
+    .barf{height:3px;border-radius:2px;transition:width .4s ease}
+    .gr2{display:flex;justify-content:space-between;font-size:10px;color:var(--sage);font-family:var(--mono)}
+    .cap{font-size:10px;color:var(--sage);font-family:var(--mono);margin-top:2px}
+    .pools{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:5px;margin-top:10px}
+    .pool{background:var(--linen);border:1px solid var(--mist);border-radius:6px;padding:8px 10px 7px}
+    .pool-name{font-size:8px;color:var(--sage);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px}
+    .pool-temp{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--moss);line-height:1}
+    .pool-unit{font-size:9px;color:var(--sage)}
+    .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:14px}
+    .spin2{width:22px;height:22px;border:1.5px solid var(--mist);border-top-color:var(--moss);border-radius:50%;animation:rot .8s linear infinite}
+    .loading p{font-size:11px;color:var(--sage);font-family:var(--mono);text-align:center;line-height:1.8}
+    .weather-stats{background:var(--linen);max-width:560px;margin:0 auto;margin-bottom:12px;padding:14px;display:flex;align-items:center}
+    .weather-left{display:flex;align-items:center;gap:6px}
+    .weather-icon{font-size:40px}
+    .weather-temp{font-family:var(--serif);font-size:24px;font-weight:500;color:var(--moss)}
+    .weather-desc{font-size:10px;color:var(--sage);font-weight:500;text-transform:uppercase;letter-spacing:1.2px}
+  </style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-in">
+    <div>
+      <div class="title">Wo hat mein Tüechli noch Platz?</div>
+      <div class="subtitle">Schwimmen in Zürich</div>
+      <div class="sub"><span class="dot" id="dot"></span><span id="subtext">Lade…</span></div>
+    </div>
+    <button class="rbtn" id="rbtn" onclick="manualRefresh()" aria-label="Aktualisieren">
+      <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+      </svg>
+    </button>
+  </div>
+</div>
+<div class="content">
+  <div class="stats" id="stats"></div>
+  <div class="weather-stats" id="weather"></div>
+  <div class="ts" id="ts"></div>
+  <div class="inner" id="main">
+    <div class="loading"><div class="spin2"></div><p>Lade Daten…</p></div>
+  </div>
+</div>
+<script>
+// ─── KONSTANTEN ───────────────────────────────────────────────────────────────
 const STADTSEITE = 'https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html';
 const PROXY = 'https://api.allorigins.win/get?url=';
 
