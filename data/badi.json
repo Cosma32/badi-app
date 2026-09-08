@@ -1,12 +1,12 @@
 {
- "stand": "2026-09-08T08:16:51.981Z",
+ "stand": "2026-09-08T09:14:55.304Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
    "name": "Flussbad Au-Höngg",
    "temp": 23,
-   "offen": false,
-   "status": "geschlossen",
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
    "uid": null
   },
@@ -124,7 +124,7 @@
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 23,
+   "temp": 22,
    "offen": true,
    "status": "offen",
    "hinweis": "Letzter Einlass 18:30 Uhr",
