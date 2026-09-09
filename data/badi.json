@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-09T17:18:50.788Z",
+ "stand": "2026-09-09T19:49:55.495Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -60,11 +60,11 @@
   },
   {
    "name": "Freibad Dolder",
-   "temp": 21,
-   "offen": true,
-   "status": "offen",
+   "temp": 19,
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "SSD-13"
+   "uid": null
   },
   {
    "name": "Freibad Heuried",
