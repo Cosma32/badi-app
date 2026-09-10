@@ -1,22 +1,22 @@
 {
- "stand": "2026-09-10T12:14:46.716Z",
+ "stand": "2026-09-10T16:26:15.944Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
    "name": "Flussbad Au-Höngg",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
    "uid": null
   },
   {
    "name": "Flussbad Oberer Letten",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "",
-   "uid": "flb6939"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "bis 19 Uhr",
+   "uid": null
   },
   {
    "name": "Flussbad Unterer Letten",
@@ -36,11 +36,11 @@
   },
   {
    "name": "Frauenbad Stadthausquai",
-   "temp": 21,
-   "offen": true,
-   "status": "offen",
+   "temp": 22,
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "flb6941"
+   "uid": null
   },
   {
    "name": "Freibad Allenmoos",
@@ -52,7 +52,7 @@
   },
   {
    "name": "Freibad Auhof",
-   "temp": 23,
+   "temp": 24,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -93,10 +93,10 @@
   {
    "name": "Freibad Zwischen den Hölzern",
    "temp": 20,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "Grillstellen gesperrt, absolutes Feuerverbot. Waldbrandgefahr!",
-   "uid": "fb018"
+   "uid": null
   },
   {
    "name": "Männerbad Schanzengraben",
@@ -149,10 +149,10 @@
   {
    "name": "Strandbad Wollishofen",
    "temp": 24,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Badi schliesst um 15.00 Uhr.",
-   "uid": "seb6948"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   }
  ],
  "hallenbaeder": [
