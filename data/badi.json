@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-10T16:26:15.944Z",
+ "stand": "2026-09-10T19:10:37.120Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -20,19 +20,19 @@
   },
   {
    "name": "Flussbad Unterer Letten",
-   "temp": 22,
-   "offen": true,
-   "status": "offen",
+   "temp": 20,
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "flb6940"
+   "uid": null
   },
   {
    "name": "Flussbad Unterer Letten (Flussteil)",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Aufgrund des zu niedrigen Wasserstands ist das Sprungbrett gesperrt.",
-   "uid": "flb8803"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Frauenbad Stadthausquai",
@@ -53,10 +53,10 @@
   {
    "name": "Freibad Auhof",
    "temp": 24,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "fb008"
+   "uid": null
   },
   {
    "name": "Freibad Dolder",
@@ -85,10 +85,10 @@
   {
    "name": "Freibad Seebach",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr.",
-   "uid": "SSD-11"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Freibad Zwischen den Hölzern",
@@ -117,18 +117,18 @@
   {
    "name": "Seebad Katzensee",
    "temp": 22,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Bad wenig besucht. Grillstellen geschlossen.",
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
    "uid": null
   },
   {
    "name": "Seebad Utoquai",
    "temp": 22,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Letzter Einlass 18:30 Uhr",
-   "uid": "SSD-10"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Strandbad Mythenquai",
@@ -141,10 +141,10 @@
   {
    "name": "Strandbad Tiefenbrunnen",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "5m Sprungbrett ist gesperrt, 3m Sprungturm und Rutschbahn gesperrt wegen tiefem Seepegel",
-   "uid": "seb6947"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Strandbad Wollishofen",
