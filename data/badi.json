@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-10T07:15:29.368Z",
+ "stand": "2026-09-10T12:14:46.716Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -52,7 +52,7 @@
   },
   {
    "name": "Freibad Auhof",
-   "temp": 24,
+   "temp": 23,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -60,19 +60,19 @@
   },
   {
    "name": "Freibad Dolder",
-   "temp": 19,
+   "temp": 21,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "",
+   "uid": "SSD-13"
+  },
+  {
+   "name": "Freibad Heuried",
+   "temp": 23,
    "offen": false,
    "status": "geschlossen",
    "hinweis": "",
    "uid": null
-  },
-  {
-   "name": "Freibad Heuried",
-   "temp": 22,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr.",
-   "uid": "fb012"
   },
   {
    "name": "Freibad Letzigraben",
@@ -103,23 +103,23 @@
    "temp": 23,
    "offen": true,
    "status": "offen",
-   "hinweis": "Wenig Wasser",
+   "hinweis": "Heute ubd morgen geöffnet",
    "uid": "flb6942"
   },
   {
    "name": "Seebad Enge",
-   "temp": 23.5,
-   "offen": true,
-   "status": "offen",
+   "temp": 24,
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "BADI-1"
+   "uid": null
   },
   {
    "name": "Seebad Katzensee",
-   "temp": 23,
+   "temp": 22,
    "offen": true,
    "status": "offen",
-   "hinweis": "Bad ist wenig besucht. Feuerverbot, Grillstellen gesperrt.",
+   "hinweis": "Bad wenig besucht. Grillstellen geschlossen.",
    "uid": null
   },
   {
@@ -133,10 +133,10 @@
   {
    "name": "Strandbad Mythenquai",
    "temp": 24,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "seb6946"
+   "uid": null
   },
   {
    "name": "Strandbad Tiefenbrunnen",
@@ -151,7 +151,7 @@
    "temp": 24,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "Badi schliesst um 15.00 Uhr.",
    "uid": "seb6948"
   }
  ],
