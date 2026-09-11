@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-11T11:09:39.069Z",
+ "stand": "2026-09-11T14:58:30.128Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -52,7 +52,7 @@
   },
   {
    "name": "Freibad Auhof",
-   "temp": 23,
+   "temp": 24,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -95,7 +95,7 @@
    "temp": 19,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "bis 17:30 Uhr, letzter Einlass 17:00 Uhr.",
    "uid": "fb018"
   },
   {
@@ -148,10 +148,10 @@
   },
   {
    "name": "Strandbad Wollishofen",
-   "temp": 23,
+   "temp": 24,
    "offen": true,
    "status": "offen",
-   "hinweis": "Aufgrund des niedrigen Wasserstandes ist der Sprungturm gesperrt.",
+   "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr. Aufgrund des niedrigen Wasserstandes ist der Sprungturm gesperrt.",
    "uid": "seb6948"
   }
  ],
