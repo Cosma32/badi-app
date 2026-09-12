@@ -1,38 +1,38 @@
 {
- "stand": "2026-09-12T05:39:37.518Z",
+ "stand": "2026-09-12T09:33:45.891Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
    "name": "Flussbad Au-Höngg",
-   "temp": 23,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
+   "temp": 22,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "Bad ist wenig besucht",
    "uid": null
   },
   {
    "name": "Flussbad Oberer Letten",
-   "temp": 23,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "bis 19 Uhr",
-   "uid": null
+   "temp": 22,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "",
+   "uid": "flb6939"
   },
   {
    "name": "Flussbad Unterer Letten",
-   "temp": 20,
-   "offen": false,
-   "status": "geschlossen",
+   "temp": 19,
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "flb6940"
   },
   {
    "name": "Flussbad Unterer Letten (Flussteil)",
    "temp": 22,
-   "offen": false,
-   "status": "geschlossen",
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "flb8803"
   },
   {
    "name": "Frauenbad Stadthausquai",
@@ -45,18 +45,18 @@
   {
    "name": "Freibad Allenmoos",
    "temp": 20,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "offen": true,
+   "status": "offen",
+   "hinweis": "bis 19.00 Uhr",
+   "uid": "fb006"
   },
   {
    "name": "Freibad Auhof",
    "temp": 24,
-   "offen": false,
-   "status": "geschlossen",
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "fb008"
   },
   {
    "name": "Freibad Dolder",
@@ -69,14 +69,14 @@
   {
    "name": "Freibad Heuried",
    "temp": 22,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "offen": true,
+   "status": "offen",
+   "hinweis": "Das Planschbecken und die Rutschbahnen sind aufgrund technischer Probleme gesperrt",
+   "uid": "fb012"
   },
   {
    "name": "Freibad Letzigraben",
-   "temp": 22,
+   "temp": 23,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -93,10 +93,10 @@
   {
    "name": "Freibad Zwischen den Hölzern",
    "temp": 19,
-   "offen": false,
-   "status": "geschlossen",
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "fb018"
   },
   {
    "name": "Männerbad Schanzengraben",
@@ -108,18 +108,18 @@
   },
   {
    "name": "Seebad Enge",
-   "temp": 24,
-   "offen": false,
-   "status": "geschlossen",
+   "temp": 23,
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "BADI-1"
   },
   {
    "name": "Seebad Katzensee",
-   "temp": 22,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
+   "temp": 21,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "Bad ist wenig besucht.",
    "uid": null
   },
   {
@@ -127,7 +127,7 @@
    "temp": 22,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "Letzter Einlass 18:30 Uhr",
    "uid": "SSD-10"
   },
   {
@@ -135,24 +135,24 @@
    "temp": 23,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "bis 19:00 Uhr, letzter Einlass um 18:30 Uhr",
    "uid": "seb6946"
   },
   {
    "name": "Strandbad Tiefenbrunnen",
    "temp": 23,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "offen": true,
+   "status": "offen",
+   "hinweis": "5m Sprungturm gesperrt, 3m Sprungturm und Rutschbahn wegen Seepegel gesperrt",
+   "uid": "seb6947"
   },
   {
    "name": "Strandbad Wollishofen",
-   "temp": 24,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "temp": 23,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "Aufgrund des niedrigen Wasserstandes ist der Sprungturm gesperrt",
+   "uid": "seb6948"
   }
  ],
  "hallenbaeder": [
