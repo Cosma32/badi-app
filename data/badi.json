@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-12T01:03:23.796Z",
+ "stand": "2026-09-12T05:39:37.518Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -36,11 +36,11 @@
   },
   {
    "name": "Frauenbad Stadthausquai",
-   "temp": 22,
-   "offen": false,
-   "status": "geschlossen",
+   "temp": 21,
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "flb6941"
   },
   {
    "name": "Freibad Allenmoos",
@@ -76,7 +76,7 @@
   },
   {
    "name": "Freibad Letzigraben",
-   "temp": 23,
+   "temp": 22,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -85,10 +85,10 @@
   {
    "name": "Freibad Seebach",
    "temp": 23,
-   "offen": false,
-   "status": "geschlossen",
+   "offen": true,
+   "status": "offen",
    "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr.",
-   "uid": null
+   "uid": "SSD-11"
   },
   {
    "name": "Freibad Zwischen den Hölzern",
@@ -125,18 +125,18 @@
   {
    "name": "Seebad Utoquai",
    "temp": 22,
-   "offen": false,
-   "status": "geschlossen",
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "SSD-10"
   },
   {
    "name": "Strandbad Mythenquai",
-   "temp": 24,
-   "offen": false,
-   "status": "geschlossen",
+   "temp": 23,
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "seb6946"
   },
   {
    "name": "Strandbad Tiefenbrunnen",
