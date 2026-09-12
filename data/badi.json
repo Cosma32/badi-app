@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-12T13:04:45.818Z",
+ "stand": "2026-09-12T16:13:13.660Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -52,7 +52,7 @@
   },
   {
    "name": "Freibad Auhof",
-   "temp": 24,
+   "temp": 25,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -92,11 +92,11 @@
   },
   {
    "name": "Freibad Zwischen den Hölzern",
-   "temp": 19,
-   "offen": true,
-   "status": "offen",
+   "temp": 20,
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "fb018"
+   "uid": null
   },
   {
    "name": "Männerbad Schanzengraben",
