@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-12T09:33:45.891Z",
+ "stand": "2026-09-12T13:04:45.818Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -12,7 +12,7 @@
   },
   {
    "name": "Flussbad Oberer Letten",
-   "temp": 22,
+   "temp": 23,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -116,10 +116,10 @@
   },
   {
    "name": "Seebad Katzensee",
-   "temp": 21,
+   "temp": 22,
    "offen": true,
    "status": "offen",
-   "hinweis": "Bad ist wenig besucht.",
+   "hinweis": "Bad ist gut besucht",
    "uid": null
   },
   {
@@ -151,7 +151,7 @@
    "temp": 23,
    "offen": true,
    "status": "offen",
-   "hinweis": "Aufgrund des niedrigen Wasserstandes ist der Sprungturm gesperrt",
+   "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr. Aufgrund des niedrigen Wasserstandes ist der Sprungturm gesperrt.",
    "uid": "seb6948"
   }
  ],
