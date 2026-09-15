@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-15T09:59:20.428Z",
+ "stand": "2026-09-15T14:40:12.650Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -60,11 +60,11 @@
   },
   {
    "name": "Freibad Dolder",
-   "temp": 20,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "",
-   "uid": "SSD-13"
+   "temp": 18,
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "Saisonende: 13.09.2026",
+   "uid": null
   },
   {
    "name": "Freibad Heuried",
@@ -76,7 +76,7 @@
   },
   {
    "name": "Freibad Letzigraben",
-   "temp": 23,
+   "temp": 24,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -92,10 +92,10 @@
   },
   {
    "name": "Freibad Zwischen den Hölzern",
-   "temp": 20,
+   "temp": 21,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "bis 19:00 Uhr , letzter Einlass um 18.30 Uhr.",
    "uid": "fb018"
   },
   {
@@ -116,15 +116,15 @@
   },
   {
    "name": "Seebad Katzensee",
-   "temp": 21,
+   "temp": 22,
    "offen": true,
    "status": "offen",
-   "hinweis": "Bad ist wenig besucht.",
+   "hinweis": "Bas ist gut besucht",
    "uid": null
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 22,
+   "temp": 23,
    "offen": true,
    "status": "offen",
    "hinweis": "Letzter Einlass 18:30 Uhr",
@@ -132,10 +132,10 @@
   },
   {
    "name": "Strandbad Mythenquai",
-   "temp": 23,
+   "temp": 24,
    "offen": true,
    "status": "offen",
-   "hinweis": "bis 19:00 Uhr, letzter Einlass um 18:30 Uhr",
+   "hinweis": "",
    "uid": "seb6946"
   },
   {
@@ -148,7 +148,7 @@
   },
   {
    "name": "Strandbad Wollishofen",
-   "temp": 23,
+   "temp": 24,
    "offen": true,
    "status": "offen",
    "hinweis": "Aufgrund des niedrigen Wasserstandes ist der Sprungturm gesperrt.",
