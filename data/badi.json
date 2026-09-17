@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-17T10:16:41.960Z",
+ "stand": "2026-09-17T15:03:33.141Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -47,7 +47,7 @@
    "temp": 22,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "bis 19.00 Uhr",
    "uid": "fb006"
   },
   {
@@ -55,7 +55,7 @@
    "temp": 25,
    "offen": true,
    "status": "offen",
-   "hinweis": "Planschbecken ausser Betrieb.",
+   "hinweis": "Die Parkmöglichkeiten sind beschränkt, es sind nur wenige Parkplätze vorhanden. Planschbecken ausser Betrieb",
    "uid": "fb008"
   },
   {
@@ -71,7 +71,7 @@
    "temp": 22,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "bis 19:00 Uhr, letzter Einlass um 18:30 Uhr",
    "uid": "fb012"
   },
   {
@@ -109,10 +109,10 @@
   {
    "name": "Seebad Enge",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "BADI-1"
+   "uid": null
   },
   {
    "name": "Seebad Katzensee",
