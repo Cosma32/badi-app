@@ -1,62 +1,62 @@
 {
- "stand": "2026-09-17T15:03:33.141Z",
+ "stand": "2026-09-17T18:57:43.915Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
    "name": "Flussbad Au-Höngg",
    "temp": 22,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
    "uid": null
   },
   {
    "name": "Flussbad Oberer Letten",
    "temp": 22,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "",
-   "uid": "flb6939"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "bis 19.00 Uhr",
+   "uid": null
   },
   {
    "name": "Flussbad Unterer Letten",
    "temp": 20,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "flb6940"
+   "uid": null
   },
   {
    "name": "Flussbad Unterer Letten (Flussteil)",
    "temp": 22,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "flb8803"
+   "uid": null
   },
   {
    "name": "Frauenbad Stadthausquai",
-   "temp": 21,
-   "offen": true,
-   "status": "offen",
+   "temp": 22,
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "flb6941"
+   "uid": null
   },
   {
    "name": "Freibad Allenmoos",
-   "temp": 22,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "bis 19.00 Uhr",
-   "uid": "fb006"
+   "temp": 21,
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Freibad Auhof",
    "temp": 25,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Die Parkmöglichkeiten sind beschränkt, es sind nur wenige Parkplätze vorhanden. Planschbecken ausser Betrieb",
-   "uid": "fb008"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Freibad Dolder",
@@ -69,34 +69,34 @@
   {
    "name": "Freibad Heuried",
    "temp": 22,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "bis 19:00 Uhr, letzter Einlass um 18:30 Uhr",
-   "uid": "fb012"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Freibad Letzigraben",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "LETZI-1"
+   "uid": null
   },
   {
    "name": "Freibad Seebach",
    "temp": 24,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "SSD-11"
+   "uid": null
   },
   {
    "name": "Freibad Zwischen den Hölzern",
    "temp": 20,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "fb018"
+   "uid": null
   },
   {
    "name": "Männerbad Schanzengraben",
@@ -117,42 +117,42 @@
   {
    "name": "Seebad Katzensee",
    "temp": 21,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Bad ist wenig besucht",
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
    "uid": null
   },
   {
    "name": "Seebad Utoquai",
    "temp": 22,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Letzter Einlass 18:30 Uhr",
-   "uid": "SSD-10"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Strandbad Mythenquai",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "bis 19:00 Uhr, letzter Einlass um 18:30 Uhr",
-   "uid": "seb6946"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Strandbad Tiefenbrunnen",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "5m-Sprungturm gesperrt, 3m-Sprungturm sowie Rutschbahn wegen tiefem Seepegel gesperrt.",
-   "uid": "seb6947"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Strandbad Wollishofen",
-   "temp": 23,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Aufgrund des niedrigen Wasserstandes ist der Sprungturm gesperrt",
-   "uid": "seb6948"
+   "temp": 24,
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   }
  ],
  "hallenbaeder": [
