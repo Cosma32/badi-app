@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-19T10:06:00.069Z",
+ "stand": "2026-09-19T13:53:19.518Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -76,7 +76,7 @@
   },
   {
    "name": "Freibad Letzigraben",
-   "temp": 22,
+   "temp": 23,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -84,7 +84,7 @@
   },
   {
    "name": "Freibad Seebach",
-   "temp": 23,
+   "temp": 24,
    "offen": true,
    "status": "offen",
    "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr.",
@@ -92,7 +92,7 @@
   },
   {
    "name": "Freibad Zwischen den Hölzern",
-   "temp": 19,
+   "temp": 20,
    "offen": true,
    "status": "offen",
    "hinweis": "",
@@ -124,7 +124,7 @@
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 21,
+   "temp": 22,
    "offen": true,
    "status": "offen",
    "hinweis": "Letzter Einlass 18:30 Uhr",
