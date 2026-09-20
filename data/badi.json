@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-20T01:13:22.641Z",
+ "stand": "2026-09-20T06:18:54.192Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -36,11 +36,11 @@
   },
   {
    "name": "Frauenbad Stadthausquai",
-   "temp": 22,
-   "offen": false,
-   "status": "geschlossen",
+   "temp": 21,
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "flb6941"
   },
   {
    "name": "Freibad Allenmoos",
@@ -76,19 +76,19 @@
   },
   {
    "name": "Freibad Letzigraben",
-   "temp": 23,
-   "offen": false,
-   "status": "geschlossen",
+   "temp": 22,
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "LETZI-1"
   },
   {
    "name": "Freibad Seebach",
-   "temp": 24,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "temp": 23,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr.",
+   "uid": "SSD-11"
   },
   {
    "name": "Freibad Zwischen den Hölzern",
@@ -109,10 +109,10 @@
   {
    "name": "Seebad Enge",
    "temp": 23,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "offen": true,
+   "status": "offen",
+   "hinweis": "Badi und Gastro schliessen um 18 Uhr",
+   "uid": "BADI-1"
   },
   {
    "name": "Seebad Katzensee",
@@ -124,19 +124,19 @@
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 22,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "temp": 21,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "Letzter Einlass 18:30 Uhr",
+   "uid": "SSD-10"
   },
   {
    "name": "Strandbad Mythenquai",
-   "temp": 24,
-   "offen": false,
-   "status": "geschlossen",
+   "temp": 23,
+   "offen": true,
+   "status": "offen",
    "hinweis": "",
-   "uid": null
+   "uid": "seb6946"
   },
   {
    "name": "Strandbad Tiefenbrunnen",
