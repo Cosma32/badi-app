@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-21T07:13:12.682Z",
+ "stand": "2026-09-21T14:11:19.536Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -7,7 +7,7 @@
    "temp": 22,
    "offen": false,
    "status": "geschlossen",
-   "hinweis": "",
+   "hinweis": "Saisonende",
    "uid": null
   },
   {
@@ -15,24 +15,24 @@
    "temp": 22,
    "offen": false,
    "status": "geschlossen",
-   "hinweis": "",
+   "hinweis": "Saisonende",
    "uid": null
   },
   {
    "name": "Flussbad Unterer Letten",
    "temp": 19,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "",
-   "uid": "flb6940"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "Saisonende",
+   "uid": null
   },
   {
    "name": "Flussbad Unterer Letten (Flussteil)",
    "temp": 22,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Das Sprungbrett ist wegen zu niedrigen Wasserstands geschlossen",
-   "uid": "flb8803"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "Saisonende",
+   "uid": null
   },
   {
    "name": "Frauenbad Stadthausquai",
@@ -44,10 +44,10 @@
   },
   {
    "name": "Freibad Allenmoos",
-   "temp": 21,
+   "temp": 20,
    "offen": false,
    "status": "geschlossen",
-   "hinweis": "",
+   "hinweis": "Saisonende",
    "uid": null
   },
   {
@@ -55,15 +55,15 @@
    "temp": 25,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr.",
    "uid": "fb008"
   },
   {
    "name": "Freibad Dolder",
-   "temp": 18,
+   "temp": 20,
    "offen": false,
    "status": "geschlossen",
-   "hinweis": "Saisonende: 13.09.2026",
+   "hinweis": "Saisonende",
    "uid": null
   },
   {
@@ -108,18 +108,18 @@
   },
   {
    "name": "Seebad Enge",
-   "temp": 23,
+   "temp": 20,
    "offen": false,
    "status": "geschlossen",
-   "hinweis": "",
+   "hinweis": "Saisonende",
    "uid": null
   },
   {
    "name": "Seebad Katzensee",
-   "temp": 21,
+   "temp": 20,
    "offen": false,
    "status": "geschlossen",
-   "hinweis": "",
+   "hinweis": "Saisonende",
    "uid": null
   },
   {
@@ -149,10 +149,10 @@
   {
    "name": "Strandbad Wollishofen",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Aufgrund des niedrigen Wasserstandes ist der Sprungturm gesperrt.",
-   "uid": "seb6948"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "Saisonende",
+   "uid": null
   }
  ],
  "hallenbaeder": [
