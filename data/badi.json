@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-22T06:16:21.135Z",
+ "stand": "2026-09-22T11:43:34.806Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -52,11 +52,11 @@
   },
   {
    "name": "Freibad Auhof",
-   "temp": 25,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "temp": 24,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "Planschbecken nicht in Betrieb",
+   "uid": "fb008"
   },
   {
    "name": "Freibad Dolder",
@@ -143,7 +143,7 @@
    "temp": 22,
    "offen": true,
    "status": "offen",
-   "hinweis": "5m Sprungturm geschlossen, 3m Sprungbrett und Rutschbahn wegen tiefem Seepegel gesperrt!",
+   "hinweis": "5m Sprungturm geschlossen, 3m Sprungturm und Rutschbahn wegen tiefem Seepegel gesperrt",
    "uid": "seb6947"
   },
   {
