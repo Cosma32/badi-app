@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-23T09:53:42.789Z",
+ "stand": "2026-09-23T14:31:13.803Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -108,10 +108,10 @@
   },
   {
    "name": "Seebad Enge",
-   "temp": 20,
+   "temp": 22,
    "offen": false,
    "status": "geschlossen",
-   "hinweis": "Saisonende",
+   "hinweis": "",
    "uid": null
   },
   {
@@ -124,7 +124,7 @@
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 20,
+   "temp": 21,
    "offen": true,
    "status": "offen",
    "hinweis": "Letzter Einlass 18:30 Uhr",
