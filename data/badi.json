@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-24T08:36:38.144Z",
+ "stand": "2026-09-24T13:45:29.375Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -55,7 +55,7 @@
    "temp": 24,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr.",
    "uid": "fb008"
   },
   {
@@ -124,10 +124,10 @@
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 20,
+   "temp": 21,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "Letzter Einlass 18:30 Uhr",
    "uid": "SSD-10"
   },
   {
