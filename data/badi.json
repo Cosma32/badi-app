@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-25T13:38:59.806Z",
+ "stand": "2026-09-25T18:03:57.765Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -52,11 +52,11 @@
   },
   {
    "name": "Freibad Auhof",
-   "temp": 24,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "bis 19.00 Uhr. Plansch ausser Betrieb.",
-   "uid": "fb008"
+   "temp": 25,
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Freibad Dolder",
@@ -77,18 +77,18 @@
   {
    "name": "Freibad Letzigraben",
    "temp": 22,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "LETZI-1"
+   "uid": null
   },
   {
    "name": "Freibad Seebach",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "bis 19.00 Uhr. Letzter Einlass 18.30 Uhr.",
-   "uid": "SSD-11"
+   "uid": null
   },
   {
    "name": "Freibad Zwischen den Hölzern",
@@ -124,27 +124,27 @@
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 20,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Letzter Einlass 18:30 Uhr",
-   "uid": "SSD-10"
+   "temp": 21,
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Strandbad Mythenquai",
    "temp": 22,
-   "offen": true,
-   "status": "offen",
+   "offen": false,
+   "status": "geschlossen",
    "hinweis": "",
-   "uid": "seb6946"
+   "uid": null
   },
   {
    "name": "Strandbad Tiefenbrunnen",
    "temp": 21,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "5m Sprungturm gesperrt, 3m Sprungturm und Rutschbahn wegen Seepegel gesperrt",
-   "uid": "seb6947"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Strandbad Wollishofen",
