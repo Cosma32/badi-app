@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-26T09:32:59.611Z",
+ "stand": "2026-09-26T13:51:09.653Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -44,11 +44,11 @@
   },
   {
    "name": "Freibad Allenmoos",
-   "temp": 24,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "Plansch ausser Betrieb",
-   "uid": "fb006"
+   "temp": 22,
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "Saisonende",
+   "uid": null
   },
   {
    "name": "Freibad Auhof",
@@ -124,7 +124,7 @@
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 20,
+   "temp": 21,
    "offen": true,
    "status": "offen",
    "hinweis": "Letzter Einlass 18:30 Uhr",
