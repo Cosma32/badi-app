@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-27T05:57:58.447Z",
+ "stand": "2026-09-27T11:22:33.245Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -52,11 +52,11 @@
   },
   {
    "name": "Freibad Auhof",
-   "temp": 25,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "temp": 24,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "Letzter Baditag. Offen bis 19.00 Uhr.",
+   "uid": "fb008"
   },
   {
    "name": "Freibad Dolder",
@@ -140,11 +140,11 @@
   },
   {
    "name": "Strandbad Tiefenbrunnen",
-   "temp": 22,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "temp": 21,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "5m Sprungbrett ist gesperrt, 3m-Sprungturm und Rutschbahn wegen tiefem Seepegel gesperrt",
+   "uid": "seb6947"
   },
   {
    "name": "Strandbad Wollishofen",
