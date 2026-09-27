@@ -1,5 +1,5 @@
 {
- "stand": "2026-09-27T11:22:33.245Z",
+ "stand": "2026-09-27T15:42:36.556Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -124,7 +124,7 @@
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 20,
+   "temp": 21,
    "offen": true,
    "status": "offen",
    "hinweis": "Letzter Einlass 18:30 Uhr",
@@ -132,10 +132,10 @@
   },
   {
    "name": "Strandbad Mythenquai",
-   "temp": 21,
+   "temp": 22,
    "offen": true,
    "status": "offen",
-   "hinweis": "letzter Baditag; offen bis 19.00 letzter Einlass 18:30",
+   "hinweis": "letzer Badetag! bis 19:00 Uhr, letzter Einlass um 18:30 Uhr",
    "uid": "seb6946"
   },
   {
