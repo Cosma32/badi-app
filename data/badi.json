@@ -1,7 +1,15 @@
 {
- "stand": "2026-09-28T06:05:33.631Z",
+ "stand": "2026-09-28T13:43:53.198Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
+  {
+   "name": "Dolder Wellenbad",
+   "temp": 20,
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "Saisonende",
+   "uid": null
+  },
   {
    "name": "Flussbad Au-Höngg",
    "temp": 22,
@@ -59,14 +67,6 @@
    "uid": null
   },
   {
-   "name": "Freibad Dolder",
-   "temp": 20,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "Saisonende",
-   "uid": null
-  },
-  {
    "name": "Freibad Heuried",
    "temp": 23,
    "offen": false,
@@ -84,11 +84,11 @@
   },
   {
    "name": "Freibad Seebach",
-   "temp": 24,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "temp": 23,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "bis 18.00 Uhr. Letzter Einlass 17.30 Uhr. Nur Schwimmerbecken in Betrieb.",
+   "uid": "SSD-11"
   },
   {
    "name": "Freibad Zwischen den Hölzern",
@@ -125,10 +125,10 @@
   {
    "name": "Seebad Utoquai",
    "temp": 21,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "offen": true,
+   "status": "offen",
+   "hinweis": "Letzter Einlass 17:30 Uhr",
+   "uid": "SSD-10"
   },
   {
    "name": "Strandbad Mythenquai",
