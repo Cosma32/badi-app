@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-09T01:24:22.418Z",
+ "stand": "2026-10-09T07:34:49.591Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -84,11 +84,11 @@
   },
   {
    "name": "Freibad Seebach",
-   "temp": 24,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "bis 18:00 letzter Einlass 17:30. Nur Schwimmerbecken in Betrieb",
-   "uid": null
+   "temp": 23,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "bis 18:00 letzter Einlass 17:30. Nur Schwimmerbecken in Betrieb.",
+   "uid": "SSD-11"
   },
   {
    "name": "Freibad Zwischen den Hölzern",
@@ -124,11 +124,11 @@
   },
   {
    "name": "Seebad Utoquai",
-   "temp": 20,
-   "offen": false,
-   "status": "geschlossen",
-   "hinweis": "",
-   "uid": null
+   "temp": 19,
+   "offen": true,
+   "status": "offen",
+   "hinweis": "Letzter Einlass 17:30 Uhr, erschwerter Seeein- und ausstieg",
+   "uid": "SSD-10"
   },
   {
    "name": "Strandbad Mythenquai",
