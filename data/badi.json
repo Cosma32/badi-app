@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-16T09:41:24.991Z",
+ "stand": "2026-10-16T14:17:58.333Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -87,7 +87,7 @@
    "temp": 23,
    "offen": true,
    "status": "offen",
-   "hinweis": "",
+   "hinweis": "Letzer Einlass 17.30 Uhr",
    "uid": "SSD-11"
   },
   {
