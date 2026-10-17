@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-17T13:14:38.240Z",
+ "stand": "2026-10-17T16:26:30.954Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -85,10 +85,10 @@
   {
    "name": "Freibad Seebach",
    "temp": 23,
-   "offen": true,
-   "status": "offen",
-   "hinweis": "bis 18:00 letzter Einlass 17:30. Nur Schwimmerbecken in Betrieb - Kinderbecken geschlossen.",
-   "uid": "SSD-11"
+   "offen": false,
+   "status": "geschlossen",
+   "hinweis": "",
+   "uid": null
   },
   {
    "name": "Freibad Zwischen den Hölzern",
