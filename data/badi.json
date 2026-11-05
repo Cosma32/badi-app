@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-05T04:09:12.424Z",
+ "stand": "2026-11-05T12:13:33.313Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -71,7 +71,7 @@
    "temp": 23,
    "offen": false,
    "status": "geschlossen",
-   "hinweis": "Saisonende",
+   "hinweis": "",
    "uid": null
   },
   {
