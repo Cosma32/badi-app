@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T01:42:12.159Z",
+ "stand": "2026-11-14T08:03:09.070Z",
  "quelle": "https://www.stadt-zuerich.ch/de/stadtleben/sport-und-erholung/sport-und-badeanlagen/sommerbaeder/badi-aktuell.html",
  "freibaeder": [
   {
@@ -158,7 +158,7 @@
  "hallenbaeder": [
   {
    "name": "Hallenbad Bläsi",
-   "uid": "SSD-2"
+   "uid": null
   },
   {
    "name": "Hallenbad Bungertwies",
